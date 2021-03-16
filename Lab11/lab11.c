@@ -1,66 +1,33 @@
 // Autor: Leonardo Rener de Oliveira RA: 201270
 
 #include <stdio.h>
+#include <stdlib.h>
+#include "Grafo.h"
+int main(){
+    int eh_digrafo = 1;
+    Grafo* gr = cria_Grafo(7, 7, 0);
 
-void peneira(int *vet, int raiz, int fundo);
+    insereAresta(gr, 0, 6, eh_digrafo, 0);
+    insereAresta(gr, 0, 1, eh_digrafo, 0);
+    insereAresta(gr, 3, 4, eh_digrafo, 0);
+    insereAresta(gr, 2, 6, eh_digrafo, 0);
+    insereAresta(gr, 6, 1, eh_digrafo, 0);
 
-void heapsort(int *vet, int n);
+    imprime_Grafo(gr);
+    //printf("\nBusca \n");
+    int vis[5];
+    // http://www.thelearningpoint.net/computer-science/algorithms-graph-traversal---breadth-first-search-with-c-program-source-code
+    //buscaProfundidade_Grafo(gr, 0, vis);
+    buscaLargura_Grafo(gr, 0, vis);
 
-int main() {
+    //int i,ant[5];
+    //float dist[5];
+    //menorCaminho_Grafo(gr, 0, ant, dist);
+    //for(i=0; i<5; i++)
+    //    printf("%d: %d -> %f\n",i,ant[i],dist[i]);
 
-    int n, k;
-    scanf("%d %d", &n, &k);
-    int vetor[n];
-    for(int i = 0; i < n; i++){
-        scanf(" %d", &vetor[i]);
-    }
+    libera_Grafo(gr);
 
-	heapsort(vetor,n);
-
-	printf("%d\n", vetor[k-1]);
-	return(0);
-}
-
-void heapsort(int *vet, int n) {
-
-	int temp; //usado pra fazer trocas
-
-	for (int i = (n / 2); i >= 0; i--) {
-		peneira(vet, i, n - 1);
-	}
-
-	for (int i = n-1; i >= 1; i--) {
-		temp = vet[0];
-		vet[0] = vet[i];
-		vet[i] = temp;
-		peneira(vet, 0, i-1);
-	}
-}
-
-void peneira(int *vet, int raiz, int fundo) {
-
-	int test, filhoMax, x;
-
-	test = 0;
-	while ((raiz*2 <= fundo) && (!test)){
-		if (raiz*2 == fundo) {
-			filhoMax = raiz * 2;
-		}
-		else if (vet[raiz * 2] > vet[raiz * 2 + 1]) {
-			filhoMax = raiz * 2;
-		}
-		else {
-			filhoMax = raiz * 2 + 1;
-		}
-
-	if (vet[raiz] < vet[filhoMax]) {
-		x = vet[raiz];
-		vet[raiz] = vet[filhoMax];
-		vet[filhoMax] = x;
-		raiz = filhoMax;
-    }
-	else {
-      test = 1; //Para o while.
-	}
-  }
+    system("pause");
+    return 0;
 }

@@ -1,3 +1,5 @@
+// Autor: Leonardo Rener de Oliveira RA: 201270
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "declaracoes.h"
